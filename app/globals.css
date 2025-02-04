@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #F5DEB3;
+  --background: #b9dae0;
   --foreground: #171717;
 }
 
@@ -18,4 +18,13 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .input-style {
+    @apply bg-slate-200 w-full  rounded-2xl p-3;
+  }
+  .input-messege-err {
+    @apply absolute top-12 text-sm w-full left-2 text-red-500
+  }
 }

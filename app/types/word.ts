@@ -1,7 +1,8 @@
 export type TWord = {
   id: number;
   word: string;
-  translation: string;
+  translate: string;
   tag: string;
-  date_added: string;
+  createdAt: string;
+  updatedAt: string;
 };
