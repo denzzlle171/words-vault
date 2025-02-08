@@ -1,4 +1,4 @@
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 
 import { Button } from "@/app/components/Button";
 import { WordForm } from "@/app/components/WordForm";
@@ -15,7 +15,7 @@ export const Modal = () => {
           <Button
             title={<XMarkIcon />}
             hoverColor="hover:bg-red-500"
-            colorText="text-red-600/100"
+            colorText="text-red-600"
             onClick={closeModal}
             size="round"
           />
