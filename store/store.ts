@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
 interface ModalState {
-  isOpen: boolean; 
-  openModal: () => void; 
+  modalStatus: "add" | "edit" | null; 
+  openModal: (type: "add" | "edit") => void;
   closeModal: () => void; 
 }
 
 
  const useModal = create<ModalState>((set) => ({
-   isOpen: false,
-   openModal: () => set({ isOpen: true }),
-   closeModal: () => set({ isOpen: false }),
+   modalStatus: null,
+   openModal: (type) => set({ modalStatus: type }),
+   closeModal: () => set({ modalStatus: null }),
  }));
 
 

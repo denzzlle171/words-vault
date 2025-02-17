@@ -1,15 +1,5 @@
 import { WordItem } from "@/app/components/WordItem";
-import { TWord } from "@/app/types/word";
-
-const fetchWords = async (): Promise<TWord[]> => {
-  const response = await fetch("http://localhost:3000/api/data", {
-    cache: "no-store",
-  });
-  if (!response.ok) {
-    throw new Error("Failed to fetch words");
-  }
-  return response.json();
-};
+import { fetchWords } from "@/utilities/gateWay";
 
 const Home = async () => {
   const myData = await fetchWords();

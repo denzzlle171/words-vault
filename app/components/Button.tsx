@@ -7,7 +7,7 @@ interface BtnType {
   size?: "sm" | "md" | "lg" | "round";
   hoverColor?: string;
   hoverColorText?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isAvailable?: boolean;
 };
 

@@ -1,51 +1,29 @@
-import{useRouter} from "next/navigation";
+
 import { useForm } from "react-hook-form";
 import { Button } from "@/app/components/Button";
 import classnames from "classnames";
-import useModal from "@/store/store";
+import { IFormInput } from "@/app/types/form";
 
-interface IFormInput {
-  word: string;
-  translate: string;
-  tag: string;
-}
 
-export const WordForm = () => {
-const router = useRouter();
- const closeModal = useModal((state) => state.closeModal);
-  
+type WordFormProps = {
+  onSubmit: (data: IFormInput) => void;
+  defaultValues?: IFormInput;
+};
+
+export const WordForm = ({ onSubmit, defaultValues }: WordFormProps) => {
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<IFormInput>({
-    defaultValues: {
+    defaultValues: defaultValues || {
       word: "",
       translate: "",
       tag: "",
     },
     mode: "onBlur",
   });
-
-  const onSubmit = async (data: IFormInput) => {
-    try {
-      const response = await fetch("http://localhost:3000/api/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
-      closeModal();
-      router.refresh()
-
-      console.log(result); //🎈
-
-    } catch (error) {
-      console.error("Failed to add word:", error);
-    }
-  };
 
   return (
     <form
