@@ -1,11 +1,10 @@
 import { create } from 'zustand'
 
 interface ModalState {
-  modalStatus: "add" | "edit" | null; 
+  modalStatus: "add" | "edit" | null;
   openModal: (type: "add" | "edit") => void;
-  closeModal: () => void; 
+  closeModal: () => void;
 }
-
 
  const useModal = create<ModalState>((set) => ({
    modalStatus: null,

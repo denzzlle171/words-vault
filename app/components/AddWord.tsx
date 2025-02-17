@@ -1,10 +1,10 @@
 "use client";
-import useModal from "@/store/store";
+import useModal from "@/store/modalStore";
 import { Button } from "@/app/components/Button";
-import { Modal } from "@/app/components/Modal"
+import { Modal } from "@/app/components/Modal";
 import { useRouter } from "next/navigation";
 import { postWord } from "@/utilities/gateWay";
-// import { PopUp } from "@/app/components/PopUp" // its for popUp message 
+// import { PopUp } from "@/app/components/PopUp" // its for popUp message
 
 export const AddWord = () => {
   const router = useRouter();

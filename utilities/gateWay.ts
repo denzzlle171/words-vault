@@ -39,7 +39,11 @@ export const postWord = async (
 };
 
 // delete word _______________________________________________________
-export const dellateWord = async (id: number, router: any) => {
+export const dellateWord = async (
+  id: number,
+  router: any,
+  closeDialog: () => void
+) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`, {
       method: "DELETE",
@@ -51,6 +55,7 @@ export const dellateWord = async (id: number, router: any) => {
     if (!response.ok) {
       throw new Error("failed to delete word");
     }
+    closeDialog();
     router.refresh(); //возможно будет оптимизировано в будущем через обновление стейта 💨
   } catch (error) {
     console.error("Ошибка при удалении:", error);

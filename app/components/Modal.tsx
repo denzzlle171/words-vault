@@ -1,9 +1,8 @@
 import { XMarkIcon } from "@heroicons/react/16/solid";
 import { Button } from "@/app/components/Button";
 import { WordForm } from "@/app/components/WordForm";
-import useModal from "@/store/store";
+import useModal from "@/store/modalStore";
 import { IFormInput } from "@/app/types/form";
-
 
 type ModalProps = {
   title: string;
@@ -11,7 +10,11 @@ type ModalProps = {
   defaultValues?: IFormInput;
 };
 
-export const Modal: React.FC<ModalProps> = ({ title, onSubmit, defaultValues }) => {
+export const Modal: React.FC<ModalProps> = ({
+  title,
+  onSubmit,
+  defaultValues,
+}) => {
   const closeModal = useModal((state) => state.closeModal);
 
   return (
@@ -33,5 +36,3 @@ export const Modal: React.FC<ModalProps> = ({ title, onSubmit, defaultValues }) 
     </div>
   );
 };
-
-
