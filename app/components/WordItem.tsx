@@ -4,7 +4,6 @@ import { TWord } from "@/app/types/word";
 import { Button } from "@/app/components/Button";
 import { TrashIcon } from "@heroicons/react/16/solid";
 import { PencilSquareIcon } from "@heroicons/react/16/solid";
-// import { dellateWord } from "@/utilities/gateWay";
 import { Modal } from "@/app/components/Modal";
 import { Dialog } from "@/app/components/Dialog";
 import { updateWord } from "@/utilities/gateWay";
@@ -37,12 +36,13 @@ export const WordItem = ({ word }: propType) => {
         <Button
           hoverColor="hover:bg-yellow-400"
           size="round"
+          color="bg-yellow-300"
           onClick={() => openModal("edit")}
           title={<PencilSquareIcon className="h-4 w-4" />}
         />
         <Button
-          hoverColor="hover:bg-red-500"
-          // onClick={() => dellateWord(word.id, router)}
+          hoverColor="hover:bg-red-600"
+          color="bg-red-400"
           onClick={() => openDialog()}
           size="round"
           title={<TrashIcon className="h-4 w-4" />}

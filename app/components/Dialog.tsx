@@ -19,9 +19,16 @@ export const Dialog = ({ title, id }: propType) => {
         <div className="flex justify-around mt-4">
           <Button
             title="Yes"
+            hoverColor="hover:bg-red-600"
+            color="bg-red-400"
             onClick={() => dellateWord(id, router, closeDialog)}
           />
-          <Button title="No" onClick={closeDialog} />
+          <Button
+            title="No"
+            hoverColor="hover:bg-green-600"
+            color="bg-green-400"
+            onClick={closeDialog}
+          />
         </div>
       </div>
     </div>

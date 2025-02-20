@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/utilities/prismaClient";
 
 // DELETE Method:
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: Request,
+  context: { params: { id: string } }
+) {
   try {
-   const id = Number(params.id);
+    const { id: idParam } = await context.params; // Ожидание `params`
+    const id = Number(idParam);
 
     if (isNaN(id)) {
       return new Response(JSON.stringify({ error: "Invalid ID" }), {
@@ -14,9 +16,9 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       });
     }
 
-    const deletedWord = await prisma.word.delete ({
-      where :{id }
-    })
+    const deletedWord = await prisma.word.delete({
+      where: { id },
+    });
 
     return new Response(
       JSON.stringify({ message: "Word deleted successfully", deletedWord }),
@@ -24,7 +26,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
-    )
+    );
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "An unknown error occurred";
@@ -33,12 +35,16 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       headers: { "Content-Type": "application/json" },
     });
   }
-};
+}
 
 // Update Method:
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(
+  request: Request,
+  context: { params: { id: string } }
+) {
   try {
-    const id = Number(params.id);
+    const { id: idParam } = await context.params; // Ожидание `params`
+    const id = Number(idParam);
     const data = await request.json();
 
     if (isNaN(id)) {

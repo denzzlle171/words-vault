@@ -1,6 +1,7 @@
 import { IFormInput } from "@/app/types/form";
 import { TWord } from "@/app/types/word";
 
+
 const BASE_URL = "http://localhost:3000/api/data";
 
 // fetch words _______________________________________________________

@@ -24,7 +24,8 @@ export const Modal: React.FC<ModalProps> = ({
           <h2 className="text-lg font-bold mt-1">{title}</h2>
           <Button
             title={<XMarkIcon />}
-            hoverColor="hover:bg-red-500"
+            hoverColor="hover:bg-red-600"
+            color="bg-red-400"
             colorText="text-red-600"
             onClick={closeModal}
             size="round"

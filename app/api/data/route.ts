@@ -1,12 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-
-// Используем один экземпляр Prisma (глобально)
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
-const prisma = globalForPrisma.prisma ?? new PrismaClient();
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+import {prisma} from '@/utilities/prismaClient'
 
 // GET Method:
-
 export async function GET() {
   try {
       const words = await prisma.word.findMany();
@@ -27,7 +21,6 @@ export async function GET() {
 }
 
 // POST Method:
-
 export async function POST(request: Request) {
   try {
     const data = await request.json();
