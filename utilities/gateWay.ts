@@ -1,12 +1,12 @@
 import { IFormInput } from "@/app/types/form";
-import { TWord } from "@/app/types/word";
+import { TResponse } from "@/app/types/response";
 
 
 const BASE_URL = "http://localhost:3000/api/data";
 
 // fetch words _______________________________________________________
-export const fetchWords = async (): Promise<TWord[]> => {
-  const response = await fetch(BASE_URL, {
+export const fetchWords = async (page = 1, limit = 10): Promise<TResponse> => {
+  const response = await fetch(`${BASE_URL}?page=${page}&limit=${limit}`, {
     cache: "no-store",
   });
   if (!response.ok) {

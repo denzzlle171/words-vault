@@ -1,11 +1,30 @@
-import {prisma} from '@/utilities/prismaClient'
+import { NextRequest } from "next/server";
+import { prisma } from "@/utilities/prismaClient";
 
 // GET Method:
-export async function GET() {
+export async function GET(request: NextRequest) {
+
+ const page = Number(request.nextUrl.searchParams.get("page")) || 1;
+ const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+
+ const skip = (page - 1) * limit;
+ const take = limit;
+
   try {
-      const words = await prisma.word.findMany();
-  
-    return new Response(JSON.stringify(words), {
+    const [words, totalCount] = await prisma.$transaction([
+      prisma.word.findMany({
+        skip,
+        take,
+        // orderBy: { id: "desc" },
+      }),
+      prisma.word.count(),
+    ]);
+
+    // Вычисление общего количества страниц
+    const totalPages = Math.ceil(totalCount / limit);
+
+
+    return new Response(JSON.stringify({words, totalPages}), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -17,11 +36,10 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     });
   }
-
 }
 
 // POST Method:
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
 

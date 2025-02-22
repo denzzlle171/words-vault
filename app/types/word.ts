@@ -1,4 +1,4 @@
-export type TWord = {
+export interface TWord {
   id: number;
   word: string;
   translate: string;
