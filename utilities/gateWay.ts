@@ -5,10 +5,17 @@ import { TResponse } from "@/app/types/response";
 const BASE_URL = "http://localhost:3000/api/data";
 
 // fetch words _______________________________________________________
-export const fetchWords = async (page = 1, limit = 10): Promise<TResponse> => {
-  const response = await fetch(`${BASE_URL}?page=${page}&limit=${limit}`, {
-    cache: "no-store",
-  });
+export const fetchWords = async (
+  page: number = 1,
+  sort: "asc" | "desc" = "desc",
+  limit: number = 10
+): Promise<TResponse> => {
+  const response = await fetch(
+    `${BASE_URL}?page=${page}&limit=${limit}&sort=${sort}`,
+    {
+      cache: "no-store",
+    }
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch words");
   }

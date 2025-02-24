@@ -1,11 +1,15 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/utilities/prismaClient";
+import { Prisma } from "@prisma/client"; // ✅ Импорт Prisma для типов
 
 // GET Method:
 export async function GET(request: NextRequest) {
 
  const page = Number(request.nextUrl.searchParams.get("page")) || 1;
  const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+ const sort =
+  (request.nextUrl.searchParams.get("sort") as Prisma.SortOrder) || "desc"; 
+
 
  const skip = (page - 1) * limit;
  const take = limit;
@@ -15,7 +19,7 @@ export async function GET(request: NextRequest) {
       prisma.word.findMany({
         skip,
         take,
-        // orderBy: { id: "desc" },
+        orderBy: { id: sort },
       }),
       prisma.word.count(),
     ]);
