@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
  const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
  const sort =
   (request.nextUrl.searchParams.get("sort") as Prisma.SortOrder) || "desc"; 
-
+const search = request.nextUrl.searchParams.get("find") || "";
 
  const skip = (page - 1) * limit;
  const take = limit;
@@ -20,8 +20,23 @@ export async function GET(request: NextRequest) {
         skip,
         take,
         orderBy: { id: sort },
+        where: {
+          OR: [
+            { word: { contains: search, mode: "insensitive" } },
+            { translate: { contains: search, mode: "insensitive" } },
+            { tag: { contains: search, mode: "insensitive" } },
+          ],
+        },
       }),
-      prisma.word.count(),
+      prisma.word.count({
+        where: {
+          OR: [
+            { word: { contains: search, mode: "insensitive" } },
+            { translate: { contains: search, mode: "insensitive" } },
+            { tag: { contains: search, mode: "insensitive" } },
+          ],
+        },
+      }),
     ]);
 
     // Вычисление общего количества страниц

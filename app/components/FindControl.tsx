@@ -1,11 +1,17 @@
 'use client';
-
+import { useState } from "react";
+import { Button } from "@/app/components/Button";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import classnames from "classnames";
 
 
+
 export const FindControl = () => {
+  const router = useRouter();
+
+  const [search, setSearch] = useState("");
+  
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
@@ -16,11 +22,30 @@ export const FindControl = () => {
     return `?${params.toString()}`;
   };
 
+  const createSearchPath = (q: string) => {
+    params.set("find", q);
+    if (!q) {
+      params.delete("find");
+    }
+    router.push(`?${params.toString()}`);
+  };
+
+
   return (
     <div>
       <div>
-        <input type="text" />
-        <button>Find</button>
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+        />
+        <Button
+          title="Search"
+          size="sm"
+          color="bg-blue-300"
+          hoverColor="hover:bg-blue-400"
+          onClick={() => createSearchPath(search)}
+        />
       </div>
       <Link
         href={createSortedLink("asc")}

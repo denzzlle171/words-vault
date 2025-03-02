@@ -8,10 +8,25 @@ const BASE_URL = "http://localhost:3000/api/data";
 export const fetchWords = async (
   page: number = 1,
   sort: "asc" | "desc" = "desc",
-  limit: number = 10
+  find?: string,
+  limit: number = 10,
 ): Promise<TResponse> => {
+
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+    sort,
+  });
+
+  if (find) {
+    params.set("find", find);
+  }
+  const url = `${BASE_URL}?${params.toString()}`;
+
+console.log(url); //🎈
+
   const response = await fetch(
-    `${BASE_URL}?page=${page}&limit=${limit}&sort=${sort}`,
+    url,
     {
       cache: "no-store",
     }
