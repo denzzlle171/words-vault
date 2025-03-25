@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 
 interface BtnType {
+  position?: string;
   title: string | ReactNode;
   color?: string;
   colorText?: string;
@@ -12,6 +13,7 @@ interface BtnType {
 };
 
 export const Button: FC<BtnType> = ({
+  position ="",
   title,
   color = "bg-zinc-200",
   colorText ,
@@ -29,7 +31,8 @@ export const Button: FC<BtnType> = ({
     round: "w-8 h-8 rounded-full flex items-center justify-center",
   };
   const btnStyle = `
-  ${baseStyles} и
+  ${position }
+  ${baseStyles}
   ${sizeStyles[size] || ""} 
   ${color || ""} 
   ${colorText || ""} 

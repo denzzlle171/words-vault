@@ -32,7 +32,7 @@ console.log(url); //🎈
     }
   );
   if (!response.ok) {
-    throw new Error("Failed to fetch words");
+    throw new Error("Failed to fetch words!!!");
   }
   return response.json();
 };

@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 
 type propType = {
   title: string;
-  id : number;
 };
 
-export const Dialog = ({ title, id }: propType) => {
+export const Dialog = ({ title }: propType) => {
   const router = useRouter();
- const closeDialog = useDialog((state) => state.closeModal);
-
+  const closeDialog = useDialog((state) => state.closeDialog);
+  const id = useDialog((state) => state.wordId);
+  
+  console.log(id); //🎈
+if (!id) return null;
   return (
     <div className="fixed inset-0 bg-gray-800/50 flex justify-center items-center backdrop-blur-sm">
       <div className="bg-white p-4 rounded-xl shadow-lg">
